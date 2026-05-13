@@ -20,10 +20,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             QuizAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                     Greeting(
+                         name = "",
+                         modifier = Modifier.padding(innerPadding)
+                     )
+                    val homeScreen = HomeScreenComponents(
+                        "Welcome to QuizApp, there are loads of challenges to select from" +
+                                "With each question, theres a 5 seconds timer, so make haste"
+                    );
+                    homeScreen.Main("Placeholder::not sure yet")
                 }
             }
         }
@@ -41,7 +46,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val homeScreen = HomeScreenComponents("");
     QuizAppTheme {
         Greeting("Android")
     }
+
+    homeScreen.Main("Placeholder::not sure yet")
 }
+
