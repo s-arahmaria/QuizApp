@@ -5,12 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.quizapp.ui.theme.QuizAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,16 +20,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             QuizAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                     Greeting(
-                         name = "",
-                         modifier = Modifier.padding(innerPadding)
-                     )
-                    val homeScreen = HomeScreenComponents(
-                        "Welcome to QuizApp, there are loads of challenges to select from" +
-                                "With each question, theres a 5 seconds timer, so make haste"
-                    );
-                    homeScreen.Main("Placeholder::not sure yet")
+                Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
+                    QuizApp()
                 }
             }
         }
@@ -36,21 +29,40 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun QuizApp() {
+    val navController = rememberNavController()
+    val viewModel: QuizViewModel = viewModel()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    val homeScreen = HomeScreenComponents("");
-    QuizAppTheme {
-        Greeting("Android")
+    NavHost(navController = navController, startDestination = "home") {
+        composable("home") {
+            HomeScreenComponents().Main(
+                onTopicSelected = { topicId ->
+                    viewModel.startQuiz(topicId)
+                    navController.navigate("quiz")
+                }
+            )
+        }
+        composable("quiz") {
+            QuizScreen(
+                viewModel = viewModel,
+                onFinished = {
+                    navController.navigate("result") {
+                        popUpTo("quiz") { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable("result") {
+            ResultScreen(
+                score = viewModel.state.score,
+                total = viewModel.state.questions.size,
+                onPlayAgain = {
+                    viewModel.resetQuiz()
+                    navController.navigate("home") {
+                        popUpTo("home") { inclusive = true }
+                    }
+                }
+            )
+        }
     }
-
-    homeScreen.Main("Placeholder::not sure yet")
 }
-

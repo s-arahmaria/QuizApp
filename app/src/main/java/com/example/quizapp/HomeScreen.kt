@@ -39,7 +39,7 @@ import com.example.quizapp.ui.theme.QuizAppTheme
 
 class HomeScreenComponents(var info: String? = null) {
 	@Composable
-	fun Main(value:  String, modifier: Modifier = Modifier) {
+	fun Main(onTopicSelected: (String) -> Unit, modifier: Modifier = Modifier) {
 			Column(
 			modifier=modifier.fillMaxSize()
 			.background(Color.Black),
@@ -48,7 +48,7 @@ class HomeScreenComponents(var info: String? = null) {
 	){
 			InfoSection()
 			Button(
-				onClick = { println("now were you rushing...or were you dragging?")},
+				onClick = { onTopicSelected("trivia") },
 				shape = RoundedCornerShape(6.dp),
 				modifier =
 					modifier.fillMaxWidth(0.78f),
@@ -57,7 +57,7 @@ class HomeScreenComponents(var info: String? = null) {
 				Text(text = "General Quiz")
 			}
 			Button(
-				onClick = { println("movie_quizz button clicked")},
+				onClick = { onTopicSelected("movies") },
 				shape = RoundedCornerShape(6.dp),
 				modifier =
 					modifier.fillMaxWidth(0.78f),
