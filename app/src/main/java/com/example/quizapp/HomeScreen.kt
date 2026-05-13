@@ -57,7 +57,7 @@ fun HomeScreen(onTopicSelected: (String) -> Unit) {
             Image(
                 painter = painterResource(id = R.drawable.quizapp_logo),
                 contentDescription = "QuizApp logo",
-                modifier = Modifier.height(95.dp),
+                modifier = Modifier.height(100.dp),
                 contentScale = ContentScale.Fit
             )
 
