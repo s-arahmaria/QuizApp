@@ -18,17 +18,20 @@ val movieQuestions = listOf(
     Question(
         questionText = "Who directed The Godfather?",
         options = listOf("Martin Scorsese", "Francis Ford Coppola", "Stanley Kubrick", "Mario Puzo"),
-        correctAnswer = "Francis Ford Coppola"
+        correctAnswer = "Francis Ford Coppola",
+        imageRes = R.drawable.the_godfather
     ),
     Question(
         questionText = "What fictitious island is Jurassic Park set on?",
         options = listOf("Isla Sorna", "Muertes Archipelago", "Isla Pena", "Isla Nublar"),
-        correctAnswer = "Isla Nublar"
+        correctAnswer = "Isla Nublar",
+        imageRes = R.drawable.jurassic_park
     ),
     Question(
         questionText = "\"Luke, there is another Skywalker\" were the last words of which Jedi?",
         options = listOf("Obi-Wan Kenobi", "Mace Windu", "Yoda", "Ahsoka Tano"),
-        correctAnswer = "Yoda"
+        correctAnswer = "Yoda",
+        imageRes = R.drawable.star_wars
     ),
     Question(
         questionText = "Which movie is this quote from? \"Carpe diem. Seize the day, boys. Make your lives extraordinary.\"",
@@ -47,22 +50,26 @@ val triviaQuestions = listOf(
     Question(
         questionText = "How many bones are in the adult human body?",
         options = listOf("196", "206", "216", "226"),
-        correctAnswer = "206"
+        correctAnswer = "206",
+        imageRes = R.drawable.skeleton
     ),
     Question(
         questionText = "Who won the 2022 FIFA World Cup?",
         options = listOf("France", "Brazil", "Argentina", "England"),
-        correctAnswer = "Argentina"
+        correctAnswer = "Argentina",
+        imageRes = R.drawable.world_cup
     ),
     Question(
         questionText = "Which artist has the most streamed song on Spotify of all time?",
         options = listOf("Drake", "Ed Sheeran", "The Weeknd", "Taylor Swift"),
-        correctAnswer = "Ed Sheeran"
+        correctAnswer = "Ed Sheeran",
+        imageRes = R.drawable.spotify
     ),
     Question(
         questionText = "Which country invented Croissants?",
         options = listOf("France", "Austria", "Belgium", "Switzerland"),
-        correctAnswer = "Austria"
+        correctAnswer = "Austria",
+        imageRes = R.drawable.croissant
     ),
     Question(
         questionText = "What show features the Bluth family?",
