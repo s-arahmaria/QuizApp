@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">QuizApp</string>
+    <string name="tagline">How much do you really know? ⚡</string>
+    <string name="home_heading">TEST YOUR KNOWLEDGE</string>
+    <string name="topic_movies">Movies</string>
+    <string name="topic_trivia">Trivia</string>
+    <string name="movies_tagline">Lights, camera, action!</string>
+    <string name="trivia_tagline">Think you know it all?</string>
 </resources>
