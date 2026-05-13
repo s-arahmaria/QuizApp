@@ -20,7 +20,8 @@ class QuizViewModel : ViewModel() {
 
     fun startQuiz(topicId: String) {
         val topic = quizTopics.find { it.id == topicId }
-        val shuffled = topic?.questions?.shuffled() ?: emptyList()
+        if (topic == null) return
+        val shuffled = topic.questions.shuffled()
         state = QuizState(questions = shuffled)
     }
 
