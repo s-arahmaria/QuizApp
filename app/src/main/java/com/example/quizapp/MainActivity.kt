@@ -3,27 +3,17 @@ package com.example.quizapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.quizapp.ui.theme.QuizAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            QuizAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
-                    QuizApp()
-                }
-            }
+            QuizApp()
         }
     }
 }
@@ -49,6 +39,12 @@ fun QuizApp() {
                     navController.navigate("result") {
                         popUpTo("quiz") { inclusive = true }
                     }
+                },
+                onHome = {
+                    viewModel.resetQuiz()
+                    navController.navigate("home") {
+                        popUpTo("home") { inclusive = true }
+                    }
                 }
             )
         }
@@ -56,12 +52,13 @@ fun QuizApp() {
             ResultScreen(
                 score = viewModel.state.score,
                 total = viewModel.state.questions.size,
+                topicId = viewModel.state.currentTopicId,
                 answeredQuestions = viewModel.state.answeredQuestions,
                 onPlayAgain = {
-                    viewModel.startQuiz(viewModel.currentTopicId)
                     navController.navigate("quiz") {
                         popUpTo("quiz") { inclusive = true }
                     }
+                    viewModel.startQuiz(viewModel.state.currentTopicId)
                 },
                 onHome = {
                     viewModel.resetQuiz()
