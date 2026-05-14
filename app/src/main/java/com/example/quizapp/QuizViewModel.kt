@@ -18,9 +18,13 @@ class QuizViewModel : ViewModel() {
     var state by mutableStateOf(QuizState())
         private set
 
+    var currentTopicId: String = ""
+        private set
+
     fun startQuiz(topicId: String) {
         val topic = quizTopics.find { it.id == topicId }
         if (topic == null) return
+        currentTopicId = topicId
         val shuffled = topic.questions.shuffled()
         state = QuizState(questions = shuffled)
     }
