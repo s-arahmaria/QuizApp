@@ -6,10 +6,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
 data class QuizState(
+    val currentTopicId: String = "",
     val questions: List<Question> = emptyList(),
     val currentQuestionIndex: Int = 0,
     val score: Int = 0,
-    val timeRemaining: Int = 5,
+    val timeRemaining: Int = 15,
     val isFinished: Boolean = false,
     val answeredQuestions: List<Pair<Question, String>> = emptyList()
 )
@@ -26,7 +27,7 @@ class QuizViewModel : ViewModel() {
         if (topic == null) return
         currentTopicId = topicId
         val shuffled = topic.questions.shuffled()
-        state = QuizState(questions = shuffled)
+        state = QuizState(questions = shuffled, currentTopicId = topicId)
     }
 
     fun onAnswerSelected(answer: String) {
@@ -46,7 +47,7 @@ class QuizViewModel : ViewModel() {
                 score = newScore,
                 currentQuestionIndex = nextIndex,
                 answeredQuestions = updatedAnswers,
-                timeRemaining = 5
+                timeRemaining = 15
             )
         }
     }
