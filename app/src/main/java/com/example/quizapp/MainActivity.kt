@@ -35,7 +35,7 @@ fun QuizApp() {
 
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            HomeScreenComponents().Main(
+            HomeScreen(
                 onTopicSelected = { topicId ->
                     viewModel.startQuiz(topicId)
                     navController.navigate("quiz")
@@ -56,7 +56,14 @@ fun QuizApp() {
             ResultScreen(
                 score = viewModel.state.score,
                 total = viewModel.state.questions.size,
+                answeredQuestions = viewModel.state.answeredQuestions,
                 onPlayAgain = {
+                    viewModel.resetQuiz()
+                    navController.navigate("home") {
+                        popUpTo("home") { inclusive = true }
+                    }
+                },
+                onHome = {
                     viewModel.resetQuiz()
                     navController.navigate("home") {
                         popUpTo("home") { inclusive = true }
