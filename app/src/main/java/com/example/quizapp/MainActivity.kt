@@ -58,9 +58,9 @@ fun QuizApp() {
                 total = viewModel.state.questions.size,
                 answeredQuestions = viewModel.state.answeredQuestions,
                 onPlayAgain = {
-                    viewModel.resetQuiz()
-                    navController.navigate("home") {
-                        popUpTo("home") { inclusive = true }
+                    viewModel.startQuiz(viewModel.currentTopicId)
+                    navController.navigate("quiz") {
+                        popUpTo("quiz") { inclusive = true }
                     }
                 },
                 onHome = {
